@@ -1,13 +1,153 @@
-body {
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+html {
+  background-color: #8f4df7;
+}
+
+body {
+  font-family: sans-serif;
+  color: #adadad;
+}
+
+.container {
+  width: 500px;
+  margin: 150px auto;
+}
+
+.todo-clear {
+  background-color: rgb(184, 131, 243);
+  height: 1px;
+  width: 50px;
+  margin: 20px auto;
+}
+
+.todo-shadow {
+  background-color: rgba(173, 108, 248, 0.753);
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.todo-input {
+  display: flex;
+  align-items: center;
+}
+
+.todo-input input {
+  height: 40px;
+  width: 85%;
+  padding: 0 10px;
+  font-size: 15px;
+  border: none;
+  color: #5c5c5c;
+}
+
+.todo-input input:focus {
+  outline: none;
+  border: none;
+}
+
+.todo-input button {
+  flex: 1;
+  height: 40px;
+  background-color: #4eb7f8;
+  color: #ebf8fe;
+  font-weight: 500;
+  letter-spacing: 1px;
+  border-radius: 0;
+  border: none;
+  cursor: pointer;
+}
+
+.todo-list {
+  background-color: white;
+  padding: 10px 20px;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3px;
+  height: 40px;
+  font-size: 15px;
+  color: #5c5c5c;
+  border-bottom: 1px dotted grey;
+}
+
+.todo-item div:first-child {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.todo-item div:last-child {
+  display: flex;
+  gap: 10px;
+  font-size: 15px;
+  color: #8b8a8a;
+  margin-right: 10px;
+}
+
+.todo-item input[type="checkbox"] {
+  cursor: pointer;
+}
+
+.todo-check,
+.todo-remove {
+  cursor: pointer;
+}
+.todo-check {
+  color: rgb(11, 194, 11);
+}
+
+.todo-remove {
+  color: rgb(238, 66, 14);
+}
+
+.todo-empty {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.footer {
+  color: #d0d9dd;
+  text-align: center;
+  font-size: 13px;
+}
+
+.header {
+  color: #d0d9dd;
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+.completed {
+  border-right: 5px solid rgb(25, 168, 25);
+}
+
+/* Toastify */
+
+.Toastify__toast--info,
+.Toastify__toast--success,
+.Toastify__toast--warning,
+.Toastify__toast--error {
+  font-size: 13px;
+}
+
+/* Sweetalert2 */
+.swal2-popup {
+  font-size: 0.6rem !important;
+  font-family: sans-serif;
+}
+
+.swal2-title {
+  font-size: 1.4em !important;
+  font-weight: normal;
 }
