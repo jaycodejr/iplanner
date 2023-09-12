@@ -12,7 +12,18 @@ function App() {
   const [todoItems, setTodoItems] = useState([]);
 
   const handleAddTodoItem = (newTodoItem) => {
+    const isExist = todoItems.find(
+      (todoItem) =>
+        todoItem.name.toLowerCase() === newTodoItem.name.toLowerCase()
+    );
+
+    if (isExist) {
+      notify("i", "Plan already exist");
+      return;
+    }
+    loading(true);
     setTodoItems((todoItems) => [...todoItems, { ...newTodoItem }]);
+    loading(false);
   };
 
   const handleTodoItemCompleted = (id) => {
@@ -25,6 +36,18 @@ function App() {
     );
   };
 
+  const handleTodoItemMarked = (id) => {
+    setTodoItems((todoItems) =>
+      todoItems.map((todoItem) =>
+        todoItem.id === id
+          ? { ...todoItem, marked: !todoItem.marked }
+          : todoItem
+      )
+    );
+  };
+
+  const handleTodoItemDelete = (id) => {};
+
   return (
     <div className="container">
       <ToastContainer />
@@ -33,9 +56,21 @@ function App() {
         <TodoInput onAddTodoItem={handleAddTodoItem} />
       </TodoShadow>
       <div className="todo-clear"></div>
+      <div className="todo-btn">
+        <button className="todo-btn-complete">
+          <FontAwesomeIcon icon={faCheckCircle} />
+          Complete
+        </button>
+        <button className="todo-btn-delete">
+          <FontAwesomeIcon icon={faTrashAlt} />
+          Delete
+        </button>
+      </div>
       <TodoShadow>
         <TodoList
           onTodoItemCompleted={handleTodoItemCompleted}
+          onTodoItemMarked={handleTodoItemMarked}
+          onTodoItemDelete={handleTodoItemDelete}
           todoItems={todoItems}
         />
       </TodoShadow>
@@ -76,15 +111,12 @@ const TodoInput = ({ onAddTodoItem }) => {
     }
 
     if (proceed.isConfirmed) {
-      loading(true);
       onAddTodoItem({
         id: Date.now(),
         name: todo,
         completed: false,
+        marked: false,
       });
-      loading(false);
-      notify("s", "Added successfully");
-
       setTodo("");
     }
   };
@@ -104,24 +136,42 @@ const TodoInput = ({ onAddTodoItem }) => {
   );
 };
 
-const TodoItem = ({ todoItem, onTodoItemCompleted }) => {
+const TodoItem = ({
+  todoItem,
+  onTodoItemCompleted,
+  onTodoItemMarked,
+  onTodoItemDelete,
+}) => {
   return (
     <div className={`todo-item ${todoItem.completed && "completed"}`}>
       <div>
-        <input
-          type="checkbox"
-          checked={todoItem.completed}
-          onChange={() => onTodoItemCompleted(todoItem.id)}
-        />
+        {!todoItem.completed && (
+          <input
+            type="checkbox"
+            checked={todoItem.marked}
+            onChange={() => onTodoItemMarked(todoItem.id)}
+          />
+        )}
         <p>{todoItem.name}</p>
       </div>
       <div>
-        <span className="todo-check">
-          <FontAwesomeIcon icon={faCheckCircle} />
-        </span>
-        <span className="todo-remove">
-          <FontAwesomeIcon icon={faTrashAlt} />
-        </span>
+        {!todoItem.completed && (
+          <>
+            <span
+              className="todo-check"
+              onClick={() => onTodoItemCompleted(todoItem.id)}
+            >
+              <FontAwesomeIcon icon={faCheckCircle} />
+            </span>
+
+            <span
+              className="todo-remove"
+              onClick={() => onTodoItemDelete(todoItem.id)}
+            >
+              <FontAwesomeIcon icon={faTrashAlt} />
+            </span>
+          </>
+        )}
       </div>
     </div>
   );

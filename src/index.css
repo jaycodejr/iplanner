@@ -62,6 +62,34 @@ body {
   cursor: pointer;
 }
 
+.todo-btn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 5px;
+  margin-bottom: 5px;
+}
+
+.todo-btn button {
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  color: white;
+  display: flex;
+  gap: 3px;
+  align-items: center;
+}
+
+.todo-btn-complete {
+  background-color: rgb(25, 177, 25);
+  border: 1px solid rgb(20, 128, 20);
+}
+
+.todo-btn-delete {
+  background-color: rgb(201, 59, 16);
+  border: 1px solid rgb(153, 53, 6);
+}
+
 .todo-list {
   background-color: white;
   padding: 10px 20px;
@@ -76,6 +104,7 @@ body {
   font-size: 15px;
   color: #5c5c5c;
   border-bottom: 1px dotted grey;
+  margin-bottom: 5px;
 }
 
 .todo-item div:first-child {
